@@ -117,10 +117,10 @@ def process_queries(matches, team_by_name, team_players, players_info):
 
 def main():
     load_dotenv()
-    token = getenv("LKSH_BASE_SERVICE_TOKEN")
+    token = getenv("LKSH_P_AUTH_TOKEN")
     
     if not token:
-        print("Missing LKSH_BASE_SERVICE_TOKEN", file=sys.stderr)
+        print("Missing LKSH_P_AUTH_TOKEN", file=sys.stderr)
         sys.exit(1)
     
     headers = {'Authorization': token}
