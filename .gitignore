@@ -1,0 +1,4 @@
+base/.env
+base/venv
+advanced/src/__pycache__
+advanced/src/cache.json
