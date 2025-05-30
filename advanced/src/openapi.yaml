@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: Sports Statistics API
+  version: 1.0.0
+  description: API для работы со спортивной статистикой
+
+components:
+  securitySchemes:
+    AuthToken:
+      type: apiKey
+      in: header
+      name: Authorization
+  schemas:
+    TeamStats:
+      type: object
+      properties:
+        wins:
+          type: integer
+        losses:
+          type: integer
+        goal_difference:
+          type: integer
+    VersusResult:
+      type: object
+      properties:
+        match_count:
+          type: integer
+    GoalInfo:
+      type: object
+      properties:
+        match:
+          type: integer
+        time:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+
+security:
+  - AuthToken: []
+
+paths:
+  /stats:
+    get:
+      summary: Получить статистику команды
+      parameters:
+        - name: team_name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamStats'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  
+  /versus:
+    get:
+      summary: Получить статистику противостояния игроков
+      parameters:
+        - name: player1_id
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: player2_id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersusResult'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  
+  /goals:
+    get:
+      summary: Получить список голов игрока
+      parameters:
+        - name: player_id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GoalInfo'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'

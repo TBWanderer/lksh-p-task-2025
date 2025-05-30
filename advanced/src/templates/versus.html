@@ -1,27 +1,42 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Versus{% endblock %}
+{% block title %}Player Matchup{% endblock %}
+
 {% block content %}
+    <section class="panel">
+        <h2>Player Matchup</h2>
+        
+        <form id="versusForm">
+            <div class="players-row">
+                <select id="player1Select">
+                    <option value="">Player 1</option>
+                    {% for player in players %}
+                    <option value="{{ player.split('ID: ')[1].split(')')[0] }}">{{ player }}</option>
+                    {% endfor %}
+                </select>
+                
+                <div class="vs">VS</div>
+                
+                <select id="player2Select">
+                    <option value="">Player 2</option>
+                    {% for player in players %}
+                    <option value="{{ player.split('ID: ')[1].split(')')[0] }}">{{ player }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit">Compare</button>
+        </form>
+        
+        <div id="result" class="matchup-result">
+            <div class="match-count">
+                <span>Matches against each other:</span>
+                <strong id="matchCount">0</strong>
+            </div>
+        </div>
+    </section>
+{% endblock %}
 
-<h1>Сравнение игроков</h1>
-<form method="get">
-	<label for="player1">Игрок 1:</label>
-	<select name="player1" id="player1">
-		<option value="">-- выберите --</option>
-		{% for p in players %}
-		<option value="{{ p }}" {% if p1==p %}selected{% endif %}>{{ p }}</option>
-		{% endfor %}
-	</select>
-	<label for="player2">Игрок 2:</label>
-	<select name="player2" id="player2">
-		<option value="">-- выберите --</option>
-		{% for p in players %}
-		<option value="{{ p }}" {% if p2==p %}selected{% endif %}>{{ p }}</option>
-		{% endfor %}
-	</select>
-	<button type="submit">Сравнить</button>
-</form>
-{% if matches is not none %}
-	<p>Матчи вместе: <strong>{{ matches }}</strong></p>
-{% endif %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/versus.js') }}"></script>
 {% endblock %}

@@ -1,23 +1,46 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Статистика{% endblock %}
+{% block title %}Team Stats{% endblock %}
+
 {% block content %}
+    <section class="panel">
+        <h2>Team Statistics</h2>
+        
+        <form id="statsForm">
+            <select id="teamSelect">
+                <option value="">Select a team</option>
+                {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Get Stats</button>
+        </form>
+        
+        <div id="result" class="stats-display">
+            <div class="team-header">
+                <h3 id="teamName">-</h3>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat">
+                    <span>Wins</span>
+                    <strong id="wins">-</strong>
+                </div>
+                
+                <div class="stat">
+                    <span>Losses</span>
+                    <strong id="losses">-</strong>
+                </div>
+                
+                <div class="stat">
+                    <span>Goal Diff</span>
+                    <strong id="goalDiff">-</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
 
-<h1>Статистика команд</h1>
-<form method="get">
-	<label for="team_name">Команда:</label>
-	<select name="team_name" id="team_name">
-		<option value="">-- выберите --</option>
-		{% for t in teams %}
-		<option value="{{ t }}" {% if selected==t %}selected{% endif %}>{{ t }}</option>
-		{% endfor %}
-	</select>
-	<button type="submit">Показать</button>
-</form>
-{% if result %}
-	<table>
-		<tr><th>Победы</th><th>Поражения</th><th>Разница голов</th></tr>
-		<tr><td>{{ result.wins }}</td><td>{{ result.losses }}</td><td>{{ result.goal_diff }}</td></tr>
-	</table>
-{% endif %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/stats.js') }}"></script>
 {% endblock %}

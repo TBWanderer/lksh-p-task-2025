@@ -7,5 +7,5 @@ services:
     volumes:
       - ./src:/app
     environment:
-      - AUTH_TOKEN=${LKSH_P_AUTH_TOKEN}
+      - LKSH_P_AUTH_TOKEN=${LKSH_P_AUTH_TOKEN}
     restart: unless-stopped

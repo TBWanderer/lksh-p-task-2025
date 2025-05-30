@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>{% block title %}Sports{% endblock %}</title>
-	<link rel="stylesheet" href="/static/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsStats | {% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-	<nav>
-		<a href="/">Home</a> |
-		<a href="/front/stats">Статистика команд</a> |
-		<a href="/front/versus">Сравнение игроков</a> | 
-		<a href="https://github.com/TBWanderer/lksh-p-task-2025">Sources</a>
-	</nav>
-	<div class="content">
-		{% block content %}{% endblock %}
-	</div>
+    <header>
+        <h1>SportsStats</h1>
+        <nav>
+            <a href="/front/stats">Teams</a>
+            <a href="/front/versus">Players</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
 </body>
 </html>
