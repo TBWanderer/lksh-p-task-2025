@@ -3,11 +3,19 @@ from config import Config
 from data_manager import SportsData
 from routes import api_routes, frontend_routes
 import logging
+import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
-logging.basicConfig(filename='server.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+os.makedirs(app.config['LOG_DIR'], exist_ok=True)
+
+logging.basicConfig(
+    filename=app.config['LOG_FILENAME'], 
+    encoding='utf-8', 
+    level=logging.DEBUG, 
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 
 data_manager = SportsData(
     token=app.config['TOKEN'],
