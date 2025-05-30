@@ -1,6 +1,7 @@
 base/.env
 base/venv
 advanced/src/__pycache__
-advanced/cache.json
+advanced/src/cache.json
+advanced/src/server.log
 advanced/src/routes/__pycache__
 advanced/venv
