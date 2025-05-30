@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}Sports{% endblock %}</title>
+	<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+	<nav>
+		<a href="/">Home</a> |
+		<a href="/front/stats">Статистика команд</a> |
+		<a href="/front/versus">Сравнение игроков</a>
+	</nav>
+	<div class="content">
+		{% block content %}{% endblock %}
+	</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Versus{% endblock %}
+{% block content %}
+
+<h1>Сравнение игроков</h1>
+<form method="get">
+	<label for="player1">Игрок 1:</label>
+	<select name="player1" id="player1">
+		<option value="">-- выберите --</option>
+		{% for p in players %}
+		<option value="{{ p }}" {% if p1==p %}selected{% endif %}>{{ p }}</option>
+		{% endfor %}
+	</select>
+	<label for="player2">Игрок 2:</label>
+	<select name="player2" id="player2">
+		<option value="">-- выберите --</option>
+		{% for p in players %}
+		<option value="{{ p }}" {% if p2==p %}selected{% endif %}>{{ p }}</option>
+		{% endfor %}
+	</select>
+	<button type="submit">Сравнить</button>
+</form>
+{% if matches is not none %}
+	<p>Матчи вместе: <strong>{{ matches }}</strong></p>
+{% endif %}
+{% endblock %}
