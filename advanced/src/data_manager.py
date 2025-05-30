@@ -1,10 +1,8 @@
-import os
 import json
 import requests
 import logging
 from collections import defaultdict
 from datetime import datetime
-import time
 
 class DataCache:
     def __init__(self, filename):
